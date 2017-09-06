@@ -13,6 +13,7 @@ public class Cliente {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Digite seu nome:");
             nome = scanner.nextLine();
+            chat.enviarLog(nome + " entrou na sala");
             Thread thread = new Thread(new Runnable() {
                 int cont = chat.lerMensagem().size();
                 @Override
@@ -30,12 +31,13 @@ public class Cliente {
                 }
             });
             thread.start();
-            while(msg != "exit"){
+            while(! msg.equals("exit")){
                 System.out.println(nome+": ");
                 msg = scanner.nextLine();
                 chat.enviarMensagem(nome+": "+msg);
-// System.out.println(chat.lerMensagem().get(cont));
+				// System.out.println(chat.lerMensagem().get(cont));
             }
+            chat.enviarLog(nome + " deixou a sala");
         }
         catch( Exception e ) {
             e.printStackTrace();
