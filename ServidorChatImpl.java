@@ -7,16 +7,19 @@ public class ServidorChatImpl extends java.rmi.server.UnicastRemoteObject implem
     int nMensagens;
 
 	ArrayList<String> logs;
-    int nLogs;
+	int nLogs;
 
 	int chatCount;
+	int maxUser;
 
 
-    public ServidorChatImpl() throws RemoteException {
+    public ServidorChatImpl(int maxUser) throws RemoteException {
         super();
         this.mensagens = new ArrayList<String>();
         this.logs = new ArrayList<String>();
-		this.chatCount = 0;
+	this.chatCount = 0;
+	this.maxUser = maxUser;
+	
 //this.mensagens = new StringBuffer();
     }
     public void enviarMensagem(String mensagem) throws RemoteException{
@@ -63,5 +66,13 @@ public class ServidorChatImpl extends java.rmi.server.UnicastRemoteObject implem
 
 	public int getCount(){
 		return chatCount;
+	}
+	
+	public boolean canJoin(){
+		if(chatCount < maxUser){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }

@@ -10,4 +10,6 @@ public interface ServidorChat extends Remote {
 
 	public boolean setChatCount(int opt) throws RemoteException;
 	public int getCount() throws RemoteException;
+	
+		public boolean canJoin() throws RemoteException;
 }

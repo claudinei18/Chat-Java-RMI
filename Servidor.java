@@ -3,15 +3,15 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.RemoteException;
 public class Servidor {
-    public Servidor(){
+    public Servidor(int maxUser){
         try {
             Registry registry = LocateRegistry.createRegistry(1098);
-            ServidorChat server = new ServidorChatImpl();
+            ServidorChat server = new ServidorChatImpl(maxUser);
             Naming.rebind("rmi://localhost:1098/ServidorChat",server);
 			
 			
 
-			Thread thread = new Thread(new Runnable() {
+		Thread thread = new Thread(new Runnable() {
                 int cont = 0;
                 @Override
                 public void run() {
@@ -19,10 +19,10 @@ public class Servidor {
                         while(true){
                             if (server.lerLog().size() > cont){
                                 System.out.println(server.lerLog().get(server.lerLog().size()-1));
-								System.out.println("Numero de usuarios: " + server.getCount());
+				System.out.println("Numero de usuarios: " + server.getCount());
                                 cont++;
                             }
-							Thread.sleep(500);
+			Thread.sleep(500);
                         }
                     } catch (RemoteException e) {
                         e.printStackTrace();
@@ -38,6 +38,6 @@ public class Servidor {
         }
     }
     public static void main (String args[]){
-        new Servidor();
+        new Servidor(Integer.parseInt(args[0]));
     }
 }
