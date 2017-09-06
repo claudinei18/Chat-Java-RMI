@@ -41,6 +41,7 @@ public class Cliente {
 		    }
 		    chat.enviarLog(nome + " deixou a sala");
 		    chat.setChatCount(1);
+		    System.exit(0);
 		}
 		
 		}
