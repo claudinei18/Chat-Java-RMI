@@ -19,6 +19,7 @@ public class Servidor {
                         while(true){
                             if (server.lerLog().size() > cont){
                                 System.out.println(server.lerLog().get(server.lerLog().size()-1));
+								System.out.println("Numero de usuarios: " + server.getCount());
                                 cont++;
                             }
 							Thread.sleep(500);

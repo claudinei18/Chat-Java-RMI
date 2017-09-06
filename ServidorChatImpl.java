@@ -9,11 +9,14 @@ public class ServidorChatImpl extends java.rmi.server.UnicastRemoteObject implem
 	ArrayList<String> logs;
     int nLogs;
 
+	int chatCount;
+
 
     public ServidorChatImpl() throws RemoteException {
         super();
         this.mensagens = new ArrayList<String>();
         this.logs = new ArrayList<String>();
+		this.chatCount = 0;
 //this.mensagens = new StringBuffer();
     }
     public void enviarMensagem(String mensagem) throws RemoteException{
@@ -45,4 +48,20 @@ public class ServidorChatImpl extends java.rmi.server.UnicastRemoteObject implem
     public ArrayList<String> lerLog() throws RemoteException{
         return logs;
     }
+
+	public boolean setChatCount(int opt){
+		if(opt == 0){
+			chatCount++;
+		}else if(opt == 1){
+			chatCount--;
+		}else{
+			return false;
+		}
+
+		return true;
+	}
+
+	public int getCount(){
+		return chatCount;
+	}
 }

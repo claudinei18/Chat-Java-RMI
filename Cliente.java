@@ -14,6 +14,7 @@ public class Cliente {
             System.out.println("Digite seu nome:");
             nome = scanner.nextLine();
             chat.enviarLog(nome + " entrou na sala");
+            chat.setChatCount(0);
             Thread thread = new Thread(new Runnable() {
                 int cont = chat.lerMensagem().size();
                 @Override
@@ -38,6 +39,7 @@ public class Cliente {
 				// System.out.println(chat.lerMensagem().get(cont));
             }
             chat.enviarLog(nome + " deixou a sala");
+            chat.setChatCount(1);
         }
         catch( Exception e ) {
             e.printStackTrace();
